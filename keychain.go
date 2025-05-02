@@ -1,17 +1,23 @@
-package main
+package puregokeychain
 
 import (
 	"github.com/Fabianexe/purekeychain/internal"
 )
 
-// SaveAccount saves account data for a given services
-func SaveAccount(service string, login string, password string) error {
-	return internal.Save(service, login, password)
+type Service struct {
+	name string
 }
 
-// GetAccount loads account data for a given service
-func GetAccount(service string) (login string, password string, err error) {
-	// todo
+func New(name string) *Service {
+	return &Service{name}
+}
 
-	return "", "", nil
+// SaveData saves account data for the services
+func (s *Service) SaveData(login string, password string) error {
+	return internal.Save(s.name, login, password)
+}
+
+// LoadData loads account data for the service
+func (s *Service) LoadData() (login string, password string, err error) {
+	return internal.Load(s.name)
 }

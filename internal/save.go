@@ -7,7 +7,7 @@ import (
 
 func Save(service string, account string, password string) error {
 	goDict := security.CreateSaveDict(service, account, password)
-	cDict := cfdictionary.CreateDictionary(goDict)
+	cDict := cfdictionary.Create(goDict)
 
 	return security.Save(cDict)
 }

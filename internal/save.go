@@ -6,7 +6,10 @@ import (
 )
 
 func Save(service string, account string, password string) error {
-	goDict := security.CreateSaveDict(service, account, password)
+	goDict := make(map[uintptr]uintptr, 10)
+	security.AppendSearchData(goDict, service)
+	security.AppendAccountData(goDict, account, password)
+
 	cDict := cfdictionary.Create(goDict)
 
 	return security.Save(cDict)

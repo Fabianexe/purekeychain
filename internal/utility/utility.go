@@ -22,3 +22,9 @@ func Load(handle uintptr, name string) uintptr {
 
 	return deRef(ret)
 }
+
+// https://github.com/opensource-apple/CF/blob/master/CFBase.h#L423
+type CFRange struct {
+	Location uint64
+	Length   uint64
+}

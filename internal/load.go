@@ -8,7 +8,10 @@ import (
 )
 
 func Load(service string) (string, string, error) {
-	goDict := security.CreateLoadDict(service)
+	goDict := make(map[uintptr]uintptr, 10)
+	security.AppendSearchData(goDict, service)
+	security.AppendReturnData(goDict)
+
 	cDict := cfdictionary.Create(goDict)
 	result, err := security.Load(cDict)
 	if err != nil {

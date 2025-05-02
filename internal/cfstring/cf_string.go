@@ -2,15 +2,11 @@ package cfstring
 
 import (
 	"github.com/ebitengine/purego"
+
+	"github.com/Fabianexe/purekeychain/internal/utility"
 )
 
 type CFString uintptr
-
-// https://github.com/opensource-apple/CF/blob/master/CFBase.h#L423
-type cfRange struct {
-	location uint64
-	length   uint64
-}
 
 func (c CFString) String() string {
 	if c == 0 {
@@ -19,7 +15,7 @@ func (c CFString) String() string {
 	length := cfStringGetLength(c)
 	b := make([]uint16, length)
 
-	cfStringGetCharacters(c, cfRange{location: 0, length: uint64(length)}, b)
+	cfStringGetCharacters(c, utility.CFRange{Length: uint64(length)}, b)
 	ret := make([]rune, 0, length)
 	for _, u := range b {
 		ret = append(ret, rune(u))
@@ -35,7 +31,7 @@ func Create(str string) CFString {
 // region C Code
 
 var cfStringGetLength func(cfString CFString) int64
-var cfStringGetCharacters func(cfString CFString, length cfRange, target []uint16)
+var cfStringGetCharacters func(cfString CFString, length utility.CFRange, target []uint16)
 var cfStringCreateWithCString func(allocator uintptr, str []byte, encoding int) CFString
 
 // https://github.com/opensource-apple/CF/blob/master/CFString.h#L129

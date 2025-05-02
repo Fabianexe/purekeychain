@@ -16,9 +16,28 @@ func Example() {
 	if err != nil {
 		panic(fmt.Sprintf("%+v", err))
 	}
-
 	fmt.Println("login:", login)
 	fmt.Println("password:", password)
-	// output: login: hallo
+
+	err = s.UpdateData("bye", "to you")
+	if err != nil {
+		panic(fmt.Sprintf("%+v", err))
+	}
+
+	login, password, err = s.LoadData()
+	if err != nil {
+		panic(fmt.Sprintf("%+v", err))
+	}
+	fmt.Println("login2:", login)
+	fmt.Println("password2:", password)
+
+	err = s.Delete()
+	if err != nil {
+		panic(fmt.Sprintf("%+v", err))
+	}
+	// output:
+	// login: hallo
 	// password: welt
+	// login2: bye
+	// password2: to you
 }

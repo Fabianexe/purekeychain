@@ -1,14 +1,14 @@
-package puregokeychain_test
+package purekeychain_test
 
 import (
 	"fmt"
 
-	puregokeychain "github.com/Fabianexe/purekeychain"
+	"github.com/Fabianexe/purekeychain"
 )
 
 func Example() {
 	// Create a new service to interact with keychain
-	s := puregokeychain.New("test_purego")
+	s := purekeychain.New("test_purego")
 
 	// Save login and password to keychain
 	err := s.Save("hallo", "welt")

@@ -1,4 +1,4 @@
-package puregokeychain
+package purekeychain
 
 import (
 	"github.com/Fabianexe/purekeychain/internal"
